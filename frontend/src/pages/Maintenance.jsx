@@ -23,7 +23,7 @@ function Maintenance() {
       setLoading(true)
 
       const response = await fetch(
-        "http://localhost:5001/api/maintenance"
+        `${import.meta.env.VITE_API_URL}/api/maintenance`
       )
 
       const data = await response.json()
@@ -53,7 +53,7 @@ function Maintenance() {
       setSubmitting(true)
 
       const response = await fetch(
-        "http://localhost:5001/api/maintenance",
+        `${import.meta.env.VITE_API_URL}/api/maintenance`,
         {
           method: "POST",
           headers: {
@@ -97,7 +97,7 @@ function Maintenance() {
       setUpdatingId(id)
 
       const response = await fetch(
-        `http://localhost:5001/api/maintenance/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/maintenance/${id}`,
         {
           method: "PUT",
           headers: {

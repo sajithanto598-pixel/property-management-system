@@ -60,19 +60,22 @@ function Amenities() {
     try {
       setLoading(true)
 
-      const response = await fetch("http://localhost:5001/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amenity: selectedAmenity.name,
-          date,
-          checkIn,
-          checkOut,
-          status: "Confirmed",
-        }),
-      })
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/bookings`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            amenity: selectedAmenity.name,
+            date,
+            checkIn,
+            checkOut,
+            status: "Confirmed",
+          }),
+        }
+      )
 
       const data = await response.json()
 

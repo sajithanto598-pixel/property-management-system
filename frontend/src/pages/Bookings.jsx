@@ -16,7 +16,9 @@ function Bookings() {
     try {
       setLoading(true)
 
-      const response = await fetch("http://localhost:5001/api/bookings")
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/bookings`
+      )
 
       const data = await response.json()
 
@@ -46,7 +48,7 @@ function Bookings() {
       setDeletingId(id)
 
       const response = await fetch(
-        `http://localhost:5001/api/bookings/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/bookings/${id}`,
         {
           method: "DELETE",
         }
@@ -60,7 +62,11 @@ function Bookings() {
       }
 
       setBookings((oldBookings) =>
-        oldBookings.filter((booking) => booking._id !== id)
+        oldBookings.map((booking) =>
+          booking._id === id
+            ? { ...booking, status: "Cancelled" }
+            : booking
+        )
       )
 
       alert("Booking cancelled successfully")
